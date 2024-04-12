@@ -1,6 +1,29 @@
+import { Routes, Route } from "react-router-dom";
+
+import SigninForm from "./_auth/forms/SigninForm";
+import SignupForm from "./_auth/forms/SignupForm";
+import { Home } from "./_root/pages";
 import "./globals.css";
+import AuthLayout from "./_auth/forms/AuthLayout";
+import RootLayout from "./_root/RootLayout";
 const App = () => {
-  return <h1 className="text-3xl font-bold underline">Hello Snapgram!</h1>;
+  return (
+    <main className="flex h-screen">
+      <Routes>
+        <Route element={<AuthLayout />}>
+          {/* public routes */}
+          <Route path="/sign-in" element={<SigninForm />} />
+          <Route path="/sign-in" element={<SignupForm />} />
+        </Route>
+        {/* private routes */}
+        <Route>
+          <Route element={<RootLayout />}>
+            <Route index element={<Home />}></Route>
+          </Route>
+        </Route>
+      </Routes>
+    </main>
+  );
 };
 
 export default App;
